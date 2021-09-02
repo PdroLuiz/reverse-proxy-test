@@ -1,0 +1,45 @@
+version: '3'
+
+
+services:
+  frontend:
+    image: frontend
+    container_name: frontend
+    build: 
+      context: ./frontend
+    # depends_on: 
+    #   - height-weight-gen-service
+    #   - imc-calc-service
+    ports:
+      - 80:80
+    restart: on-failure
+  # reverse-proxy:
+  #   image: nginx:1.17.10 
+  #   container_name: reverse_proxy_demo
+  #   depends_on: 
+  #     - frontend
+  #     - height-weight-gen-service
+  #     - imc-calc-service
+  #   volumes:
+  #     - /reverse_proxy/nginx.conf:/etc/nginx/nginx.conf
+  #   ports: 
+  #     - 80:80
+
+
+  # imc-calc-service:
+  #   image: imc-calc-service
+  #   container_name: imc-calc-service
+  #   build: 
+  #     context: ./imc-calc-service
+  #   ports: 
+  #     - 3333:3333  
+  #   restart: on-failure
+
+  # height-weight-gen-service:
+  #   image: height-weight-gen-service
+  #   container_name: height-weight-gen-service
+  #   build: 
+  #     context: ./height-weight-gen-service
+  #   ports: 
+  #     - 3334:3334  
+  #   restart: on-failure
