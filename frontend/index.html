@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site</title>
+</head>
+<body>
+    <div class="main">
+        <p>The IMC of a body weighting <strong>0</strong> Kg</p>
+        <p>and a Height of <strong>0</strong> cm</p>
+        <p>is equal to <strong>0</strong></p>        
+    </div>
+</body>
+<script>
+
+    function render({weight, height, imc}) {
+        const main = document.querySelector("div.main");
+
+        main.innerHTML = `
+        <p>The IMC of a body weighting <strong>${weight}</strong> Kg</p>
+        <p>and a Height of <strong>${height}</strong> cm</p>
+        <p>is equal to <strong>${imc}</strong></p> 
+        `
+
+    }
+
+    fetch("http://localhost:3333/")
+    .then(response => response.json())
+    .then(data => {
+        let height = data.height;
+        let weight = data.weight;
+        fetch(`http://localhost:3334/?height=${data.height}&weight=${data.weight}`)
+        .then(response => response.json())
+        .then(dataImc => {
+            let imc = dataImc.imc;
+            render({height, imc, weight});
+        })
+    });
+</script>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(218, 218, 218);
+    }
+
+    .main {
+        text-align: center;
+    }
+
+    .main p {
+        margin: 4px;
+    }
+    
+</style>
+</html>
