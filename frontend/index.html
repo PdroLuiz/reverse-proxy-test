@@ -26,12 +26,12 @@
 
     }
 
-    fetch("http://localhost:3333/")
+    fetch("/height-weight-gen-service")
     .then(response => response.json())
     .then(data => {
         let height = data.height;
         let weight = data.weight;
-        fetch(`http://localhost:3334/?height=${data.height}&weight=${data.weight}`)
+        fetch(`/imc-calc-service?height=${data.height}&weight=${data.weight}`)
         .then(response => response.json())
         .then(dataImc => {
             let imc = dataImc.imc;

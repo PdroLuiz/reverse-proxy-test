@@ -11,7 +11,7 @@ services:
       - height-weight-gen-service
       - imc-calc-service
     volumes:
-      - /reverse_proxy/nginx.conf
+      - ./reverse_proxy/nginx.conf:/etc/nginx/nginx.conf
     ports: 
       - 80:80
 
